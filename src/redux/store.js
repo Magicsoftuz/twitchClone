@@ -1,4 +1,10 @@
-import { createStore } from "redux";
+import { compose, applyMiddleware, createStore } from "redux";
 import { intialState, reducers } from "./reducers";
 
-export const store = createStore(reducers, intialState);
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export const store = createStore(
+  reducers,
+  intialState,
+  composeEnhancer(applyMiddleware())
+);
