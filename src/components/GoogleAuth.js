@@ -13,7 +13,7 @@ class GoogleAuth extends React.Component {
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();
-          this.setState({ isSignedIn: this.auth.isSignedIn.get() });
+          this.onAuthChange(this.auth.isSignedIn.get());
           this.auth.isSignedIn.listen(this.onAuthChange);
         })
         .catch((err) => {
@@ -22,8 +22,15 @@ class GoogleAuth extends React.Component {
     });
   }
 
-  onAuthChange = () => {
-    this.setState({ isSignedIn: this.auth.isSignedIn.get() });
+  onAuthChange = (isSignedIn) => {
+    if (isSignedIn) {
+      this.props.signInAction(
+        this.auth.currentUser.get().getId(),
+        this.auth.currentUser.get().getBasicProfile().getName()
+      );
+    } else {
+      this.props.signOutAction();
+    }
   };
 
   onSignIn = () => {
@@ -35,20 +42,20 @@ class GoogleAuth extends React.Component {
   };
 
   renderButton() {
-    console.log(this.state);
-    if (this.state.isSignedIn === null) {
+    console.log(this.props);
+    if (this.props.isSignedIn === null) {
       return null;
-    } else if (this.state.isSignedIn === true) {
+    } else if (this.props.isSignedIn === true) {
       return (
         <div>
           <button onClick={this.onSignOut} className="ui red google button">
             <i className="ui google icon" />
             Sign out
           </button>
-          <h3>{this.auth.currentUser.get().getBasicProfile().getName()}</h3>
+          <h3>{this.props.info.name}</h3>
         </div>
       );
-    } else if (this.state.isSignedIn === false) {
+    } else if (this.props.isSignedIn === false) {
       return (
         <button onClick={this.onSignIn} className="ui green google button">
           <i className="ui google icon" />
