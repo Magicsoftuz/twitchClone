@@ -1,8 +1,10 @@
 import { SIGN_OUT, SING_IN } from "../actions";
+import { reducer as formReduecers } from "redux-form";
+import { combineReducers } from "redux";
 
 export const intialState = { isSignedIn: null, info: { id: null, name: null } };
 
-export const reducers = (state = intialState, action) => {
+const authReducers = (state = intialState, action) => {
   if (action.type === SING_IN) {
     return {
       ...state,
@@ -17,4 +19,10 @@ export const reducers = (state = intialState, action) => {
       info: { ...state.info, id: null, name: null },
     };
   }
+  return state;
 };
+
+export const allReducers = combineReducers({
+  auth: authReducers,
+  form: formReduecers,
+});
