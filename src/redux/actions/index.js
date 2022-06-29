@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import streams from "../../apis/streams";
 export const SING_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
