@@ -24,7 +24,7 @@ class StreamCreate extends React.Component {
   };
 
   onSubmit(event) {
-    console.log(event);
+    this.props.createStream(event);
   }
 
   render() {
