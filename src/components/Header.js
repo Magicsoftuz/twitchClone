@@ -1,6 +1,9 @@
 import React from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+
+import { BrowserRouter, Link, withRouter } from "react-router-dom";
 import GoogleAuthContainer from "../redux/containers/GoogleAuthContainer";
+import LoginContainer from "../redux/containers/LoginContainer";
+import Login from "./auth/login";
 
 const Header = () => {
   return (
@@ -15,7 +18,9 @@ const Header = () => {
               Streams
             </Link>
             <div>
-              <GoogleAuthContainer className="item" />
+              <Link to={"/login"} className="right menu">
+                <Login />
+              </Link>
             </div>
           </div>
         </div>

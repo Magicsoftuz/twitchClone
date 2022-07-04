@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, withRouter } from "react-router-dom";
 import Header from "./Header";
 import StreamShow from "./streams/StreamShow";
 import StreamCreate from "./streams/StreamCreate";
@@ -8,6 +8,7 @@ import StreamEdit from "./streams/StreamEdit";
 import StreamList from "./streams/StreamList";
 import StreamCreateContainer from "../redux/containers/StreamCreateContainer";
 import RegisterContainer from "../redux/containers/RegisterContainer";
+import LoginContainer from "../redux/containers/LoginContainer";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/register" exact>
             <RegisterContainer />
           </Route>
+          <Route path="/login" exact component={LoginContainer} />
         </div>
       </BrowserRouter>
     </div>

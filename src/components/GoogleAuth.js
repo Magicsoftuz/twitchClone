@@ -2,8 +2,6 @@ import React from "react";
 import { signInAction, signOutAction } from "../redux/actions/action";
 
 class GoogleAuth extends React.Component {
-  state = { kirganmisan: null };
-
   componentDidMount() {
     window.gapi.load("auth2", () => {
       window.gapi.auth2
